@@ -1,0 +1,24 @@
+<html lang="en">
+<head>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/styles.css' %}">
+
+  <title>How much would life cost if you earned a minimal wage?</title>
+    </head>
+    <h3>
+      How much would life in Poland cost if you earned a minimal wage?
+    </h3>
+    <body>
+      <div id="input">
+        <form action="/your-wage/" method="post">{% csrf_token %}
+        <label for="your_wage">Your monthly wage in PLN: </label>
+        <input id="your_wage" type="text" name="your_wage" value="{{ current_wage }}">
+        <input type="submit" value="OK">
+    </form>
+      <div id="content">
+        {% for item, cost in current_numbers %}
+        <li>{{item}}: {{cost}} PLN
+        {% endfor %}
+      </div>
+    </body>
+  </html>
