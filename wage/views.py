@@ -32,7 +32,7 @@ def index(request):
             item = item.strip().split("  ")
             living_costs[item[0]] = float(item[-1][:-2].strip().replace(',', ''))
 
-    template = loader.get_template('polls/index.html')
+    template = loader.get_template('wage/index.html')
     context = {
         'current_numbers': living_costs.items,
     }
