@@ -4,6 +4,6 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('', views.index, name='your-wage')
+    path('', views.contact_view, name='your-wage')
     #url(r'^search-form/$', views.search_form),
 ]

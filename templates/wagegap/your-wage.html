@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   {% load static %}
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/styles.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'wagegap/styles.css' %}">
 
   <title>How much would life cost if you earned a minimal wage?</title>
     </head>
@@ -14,7 +14,8 @@
         <label for="your_wage">Your monthly wage in PLN: </label>
         <input id="your_wage" type="text" name="your_wage" value="{{ current_wage }}">
         <input type="submit" value="OK">
-    </form>
+    </form></div>
+    <h4>Your rescaled living costs</h4>
       <div id="content">
         {% for item, cost in current_numbers %}
         <li>{{item}}: {{cost}} PLN

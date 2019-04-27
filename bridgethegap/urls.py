@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('polls/', include('polls.urls')),
-    path('your-wage/', include('polls.urls')),
+    path('wagegap/', include('wagegap.urls')),
+    path('your-wage/', include('wagegap.urls')),
     url(r'^admin/', admin.site.urls),
 ]
