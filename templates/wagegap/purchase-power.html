@@ -1,0 +1,12 @@
+{% extends "wagegap/base.html" %}
+{% block content %}
+  <h3>
+    How much would be your life costs if you earned a minimal wage?
+  </h3>
+<h4>Current living costs in Poland</h4>
+  <div id="content">
+    {% for item, cost in current_numbers %}
+    <li>{{item}}: {{cost}} PLN
+    {% endfor %}
+  </div>
+{% endblock %}}
