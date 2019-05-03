@@ -4,18 +4,18 @@ from urllib.request import urlopen
 import ssl
 
 # Create your models here.
-class MinWage:
+class MinWage():
 
-    def __init__(self, country="Poland"):
+    def __init__(self, country):
         self.COUNTRY = country
-        self.CURRENCY = "PLN"
-        self.URL_DATA = 'https://www.numbeo.com/cost-of-living/country_result.jsp?country=Poland'
-        self.MINIMAL_WAGE = 1634
+        self.URL_DATA = 'https://www.numbeo.com/cost-of-living/country_result.jsp?country='+self.COUNTRY+'&displayCurrency=EUR'
+        self.MINIMAL_WAGE = 379
+        self.costs = {}
         self.load_prices()
 
 
     def load_prices(self):
-        self.costs = {}
+
         context = ssl._create_unverified_context()
         serialized_data = urlopen(self.URL_DATA, context=context)
 
@@ -23,19 +23,20 @@ class MinWage:
         data = soup.get_text().replace('\xa0', ' ').split("\n")
 
         for item in data:
-            if "zł" in str(item):
+            if chr(8364) in str(item):
                 item = item.strip().split("  ")
                 self.costs[item[0]] = float(item[-1][:-2].strip().replace(',', ''))
 
 class CustomWage:
 
-    def __init__(self, wage, country="Poland"):
-        self.min_wage = MinWage(country)
+    def __init__(self, wage, country, min_wage):
+        self.min_wage = min_wage
         self.wage = wage
+        self.costs = {}
         self.rescale_prices()
 
+
     def rescale_prices(self):
-        self.costs = {}
-        scale_factor = self.wage/self.MinWage
+        scale_factor = self.wage/self.min_wage.MINIMAL_WAGE
         for item, real_cost in self.min_wage.costs.items():
-            self.costs[item] = real_cost * scale_factor
+            self.costs[item] = round(real_cost * scale_factor, 2)
