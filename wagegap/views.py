@@ -16,6 +16,7 @@ def index(request):
     context = {
         'current_numbers': wage.costs.items,
     }
+    print(wage.costs)
     return render(request, 'wagegap/index.html', context)
 
 def purchase_power(request):
@@ -28,6 +29,6 @@ def purchase_power(request):
             print("Wrong input")
 
     context = {
-        'current_numbers': wage.costs.items,
+        'current_numbers': wage.costs,
     }
     return render(request, 'wagegap/purchase_power.html', context)

@@ -20,10 +20,13 @@
       <input type="submit" class="btn" value="Click" name="wagesubmit">
     </form>
   </div>
-<h4>Current living costs in Poland</h4>
+<h3>Current living costs in Poland</h3>
   <div id="content">
-    {% for item, cost in current_numbers %}
-    <li>{{item}}: {{cost}} €
+    {% for header, category in current_numbers %}
+      <h4>{{ header }}</h4>
+        {%for item, price in category.items %}
+        <li>{{ item }} {{ price }} €</li>
+        {% endfor %}
     {% endfor %}
   </div>
 {% endblock %}}

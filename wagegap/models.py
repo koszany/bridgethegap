@@ -22,10 +22,15 @@ class MinWage():
         soup = BeautifulSoup(serialized_data, features="html.parser")
         data = soup.get_text().replace('\xa0', ' ').split("\n")
 
+        glob_dict = {}
+        category='No category'
         for item in data:
-            if chr(8364) in str(item):
+            if '[ Edit ]' in item:
+                category = item.strip('[ Edit ]')
+                self.costs[category] = {}
+            if chr(8364) in item:
                 item = item.strip().split("  ")
-                self.costs[item[0]] = float(item[-1][:-2].strip().replace(',', ''))
+                self.costs[category][item[0]] = float(item[-1][:-2].strip().replace(',', ''))
 
 class CustomWage:
 
