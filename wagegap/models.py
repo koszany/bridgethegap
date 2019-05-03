@@ -31,7 +31,7 @@ class MinWage():
             if chr(8364) in item:
                 item = item.strip().split("  ")
                 self.costs[category][item[0]] = float(item[-1][:-2].strip().replace(',', ''))
-
+        del self.costs['Salaries And Financing']
 class CustomWage:
 
     def __init__(self, wage, country, min_wage):
