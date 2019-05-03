@@ -18,12 +18,6 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-<<<<<<< HEAD
-    path('wagegap/', include('wagegap.urls')),
-    path('your-wage/', include('wagegap.urls')),
-=======
-    path('wage/', include('wage.urls')),
-    path('your-wage/', include('wage.urls')),
->>>>>>> 7302cf3a0a02a6d88ca437dd83c82703a7887c47
-    url(r'^admin/', admin.site.urls),
+    path('', include('wagegap.urls')),
+    path('admin/', admin.site.urls),
 ]
