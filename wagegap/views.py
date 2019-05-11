@@ -14,9 +14,8 @@ def index(request):
         return redirect('purchase-power')
 
     context = {
-        'current_numbers': wage.costs.items,
+        'countries': ["Poland", "France", "Germany", "Spain"]
     }
-    print(wage.costs)
     return render(request, 'wagegap/index.html', context)
 
 def purchase_power(request):
@@ -29,6 +28,6 @@ def purchase_power(request):
             print("Wrong input")
 
     context = {
-        'current_numbers': wage.costs,
+        'current_numbers': wage.costs.items,
     }
     return render(request, 'wagegap/purchase_power.html', context)

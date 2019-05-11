@@ -1,32 +1,31 @@
 {% extends "wagegap/base.html" %}
 {% block content %}
+
   <h3>
     How much would be your life costs if you earned a minimal wage?
   </h3>
-  <div id="country">
-    <form action="view" method="POST">
-      {% csrf_token %}
-      <select name="contry">
-      {% for v in data %}
-          <option value="{{v.id}}">{{v.room}} {{v.date}}</option>
-      {% endfor %}
-      </select>
-      <input type="submit" class="btn" value="Send" name="select_country">
-  </form>
+    <span class="align-middle"
+<div class="row w-25 mx-md-3">
+
+  <div class="col px-md-5"><div class="p-3 border bg-light">
+  <select class="custom-select" size=5 multiple>
+  <option selected disabled>Choose country</option>
+  {% for country in countries %}
+      <option value="{{country.id}}">{{ country }}</option>
+  {% endfor %}
+</select>
   </div>
-  <div id="wage">
+  </div>
+  <div class="col px-md-5"><div class="p-3 border bg-light">
     <form action="#" method="get">
-      <input type="text" value="Your wage" name="wagebox"/>
-      <input type="submit" class="btn" value="Click" name="wagesubmit">
+      <h4>Your monthly income</h4>
+      <input type="text" name="wagebox"/>
+      <input type="submit" class="btn btn-outline-secondary" value="Submit" name="wagesubmit"/>
     </form>
   </div>
-<h3>Current living costs in Poland</h3>
-  <div id="content">
-    {% for header, category in current_numbers %}
-      <h4>{{ header }}</h4>
-        {%for item, price in category.items %}
-        <li>{{ item }} {{ price }} €</li>
-        {% endfor %}
-    {% endfor %}
   </div>
-{% endblock %}}
+</span>
+</div>
+
+
+{% endblock %}

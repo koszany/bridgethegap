@@ -3,10 +3,40 @@
   <h3>
     How much would be your life costs if you earned a minimal wage?
   </h3>
-<h4>Current living costs in France</h4>
-  <div id="content">
-    {% for item, cost in current_numbers %}
-    <li>{{item}}: {{cost}} €
+  <h3>Current living costs in Poland</h3>
+    <div id="content">
+
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Item</th>
+            <th scope="col">Current price</th>
+            <th scope="col">Your price</th>
+            <th scope="col">Difference</th>
+          </tr>
+        </thead>
+        {% for header, category in current_numbers %}
+        <thead class="thead-light">
+
+            <th scope="row">{{ header }}</th>
+            <th scope="row"></th>
+            <th scope="row"></th>
+            <th scope="row"></th>
+
+        </thead>
+
+    <tbody>
+          {%for item, price in category.items %}
+      <tr>
+        <th scope="row">{{ item }}</th>
+        <td>{{ price }} €</td>
+        <td>{{ price }} €</td>
+        <td> 100% </td>
+      </tr>
+      {% endfor %}
+    </tbody>
     {% endfor %}
-  </div>
+  </table>
+
+    </div>
 {% endblock %}}
