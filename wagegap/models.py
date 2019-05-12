@@ -4,44 +4,38 @@ from urllib.request import urlopen
 import ssl
 
 # Create your models here.
-class MinWage():
 
-    def __init__(self, country):
-        self.COUNTRY = country
-        self.URL_DATA = 'https://www.numbeo.com/cost-of-living/country_result.jsp?country='+self.COUNTRY+'&displayCurrency=EUR'
-        self.MINIMAL_WAGE = 379
-        self.costs = {}
-        self.load_prices()
+class Country(models.Model):
+    name = models.CharField(max_length=100)
 
+class MinWage(models.Model):
+    country = models.ForeignKey(Country, on_delete=models.CASCADE)
+    wage = models.IntegerField()
+    last_update = models.DateField()
 
-    def load_prices(self):
+class Category(models.Model):
+    name = models.TextField()
 
-        context = ssl._create_unverified_context()
-        serialized_data = urlopen(self.URL_DATA, context=context)
+class Spending(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    name = models.TextField()
 
-        soup = BeautifulSoup(serialized_data, features="html.parser")
-        data = soup.get_text().replace('\xa0', ' ').split("\n")
-
-        glob_dict = {}
-        category='No category'
-        for item in data:
-            if '[ Edit ]' in item:
-                category = item.strip('[ Edit ]')
-                self.costs[category] = {}
-            if chr(8364) in item:
-                item = item.strip().split("  ")
-                self.costs[category][item[0]] = float(item[-1][:-2].strip().replace(',', ''))
-        del self.costs['Salaries And Financing']
-class CustomWage:
-
-    def __init__(self, wage, country, min_wage):
-        self.min_wage = min_wage
-        self.wage = wage
-        self.costs = {}
-        self.rescale_prices()
-
-
-    def rescale_prices(self):
-        scale_factor = self.wage/self.min_wage.MINIMAL_WAGE
-        for item, real_cost in self.min_wage.costs.items():
-            self.costs[item] = round(real_cost * scale_factor, 2)
+class Cost(models.Model):
+    country = models.ForeignKey(Country, on_delete=models.CASCADE)
+    spending = models.ForeignKey(Spending, on_delete=models.CASCADE)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    last_update = models.DateField(auto_now=True)
+#
+# class CustomWage:
+#
+#     def __init__(self, wage, country, min_wage):
+#         self.min_wage = min_wage
+#         self.wage = wage
+#         self.costs = {}
+#         self.rescale_prices()
+#
+#
+#     def rescale_prices(self):
+#         scale_factor = self.wage/self.min_wage.MINIMAL_WAGE
+#         for item, real_cost in self.min_wage.costs.items():
+#             self.costs[item] = round(real_cost * scale_factor, 2)
