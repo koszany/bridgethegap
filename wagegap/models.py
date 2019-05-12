@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 from urllib.request import urlopen
 import ssl
 
-# Create your models here.
 
 class Country(models.Model):
     name = models.CharField(max_length=100)
@@ -25,17 +24,3 @@ class Cost(models.Model):
     spending = models.ForeignKey(Spending, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     last_update = models.DateField(auto_now=True)
-#
-# class CustomWage:
-#
-#     def __init__(self, wage, country, min_wage):
-#         self.min_wage = min_wage
-#         self.wage = wage
-#         self.costs = {}
-#         self.rescale_prices()
-#
-#
-#     def rescale_prices(self):
-#         scale_factor = self.wage/self.min_wage.MINIMAL_WAGE
-#         for item, real_cost in self.min_wage.costs.items():
-#             self.costs[item] = round(real_cost * scale_factor, 2)
