@@ -38,6 +38,7 @@ def parse_min_wages():
     return min_wages
 
 def parse_price2spending_dict(country_name):
+    country_name = country_name.replace(' ', '+')
     URL_DATA = 'https://www.numbeo.com/cost-of-living/country_result.jsp?country='+country_name+'&displayCurrency=EUR'
     context = ssl._create_unverified_context()
     serialized_data = urlopen(URL_DATA, context=context)
