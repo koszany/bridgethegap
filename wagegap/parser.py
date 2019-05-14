@@ -4,7 +4,7 @@ import ssl
 import datetime
 import calendar
 
-def parse_min_wages():
+def get_min_wages():
     COUNTRIES = ['Belgium', 'Bulgaria', 'Czech Republic', 'Estonia',
      'Poland', 'Germany', 'France', 'United Kingdom',
      'Greece', 'Hungary', 'Ireland', 'Latvia', 'Lithuania',
@@ -37,7 +37,7 @@ def parse_min_wages():
 
     return min_wages
 
-def parse_price2spending_dict(country_name):
+def get_price2spending_dict(country_name):
     country_name = country_name.replace(' ', '+')
     URL_DATA = 'https://www.numbeo.com/cost-of-living/country_result.jsp?country='+country_name+'&displayCurrency=EUR'
     context = ssl._create_unverified_context()
@@ -60,7 +60,7 @@ def parse_price2spending_dict(country_name):
     #{(category, item): price}
     return price2spending
 
-def parse_spending2category_dict():
+def get_spending2category_dict():
     URL_DATA = 'https://www.numbeo.com/cost-of-living/country_result.jsp?country=Poland&displayCurrency=EUR'
     context = ssl._create_unverified_context()
     serialized_data = urlopen(URL_DATA, context=context)
@@ -83,9 +83,9 @@ def parse_spending2category_dict():
     return spending2category
 
 def main():
-    print(parse_min_wages())
-    print(parse_spending2category_dict())
-    print(parse_price2spending_dict('France'))
+    print(get_min_wages())
+    print(get_spending2category_dict())
+    print(get_price2spending_dict('France'))
 
 
 if __name__ == '__main__':
