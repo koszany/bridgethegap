@@ -47,12 +47,17 @@ def parse_price2spending_dict(country_name):
     data = soup.get_text().replace('\xa0', ' ').split("\n")
 
     price2spending = {}
+    category='No category'
     for item in data:
-        if chr(8364) in item:
+        if '[ Edit ]' in item:
+            category = item.strip('[ Edit ]')
+        elif chr(8364) in item:
             item = item.strip().split("  ")
-            price2spending[item[0]] = float(item[-1][:-2].strip().replace(',', ''))
+            price2spending[(category, item[0])] = float(item[-1][:-2].strip().replace(',', ''))
 
-    del price2spending['Average Monthly Net Salary (After Tax)']
+    del price2spending[('Salaries And Financing', 'Average Monthly Net Salary (After Tax)')]
+
+    #{(category, item): price}
     return price2spending
 
 def parse_spending2category_dict():
