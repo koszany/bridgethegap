@@ -33,7 +33,7 @@ class Spending(models.Model):
 class Cost(models.Model):
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
     spending = models.ForeignKey(Spending, on_delete=models.CASCADE)
-    price = models.DecimalField(max_digits=6, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
     last_update = models.DateField(auto_now=True)
 
     def __str__(self):
