@@ -8,17 +8,20 @@
 <div class="row w-25 mx-md-3">
 
   <div class="col px-md-5"><div class="p-3 border bg-light">
-  <select class="custom-select" size=5 multiple>
-  <option selected disabled>Choose country</option>
-  {% for country in countries %}
-      <option value="{{country.id}}">{{ country }}</option>
-  {% endfor %}
-</select>
   </div>
   </div>
   <div class="col px-md-5"><div class="p-3 border bg-light">
-    <form action="#" method="get">
+
+    <form action="" method="get">
+      <select class="custom-select" size=10 multiple>
+      <option name="country">Choose country</option>
+      {% for country in countries %}
+        <option value="lalala">{{ country.name }}</option>
+      {% endfor %}
+      <option selected value="{{country.id}}"></option>
+    </select>
       <h4>Your monthly income</h4>
+      <input type="hidden" name='ddddd' />
       <input type="text" name="wagebox"/>
       <input type="submit" class="btn btn-outline-secondary" value="Submit" name="wagesubmit"/>
     </form>
