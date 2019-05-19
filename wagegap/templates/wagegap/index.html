@@ -1,32 +1,32 @@
 {% extends "wagegap/base.html" %}
 {% block content %}
 
+      <span class="align-middle"
+
+<div class="row w-25 mx-md-3">
   <h3>
     How much would be your life costs if you earned a minimal wage?
   </h3>
-    <span class="align-middle"
-<div class="row w-25 mx-md-3">
 
-  <div class="col px-md-5"><div class="p-3 border bg-light">
   </div>
-  </div>
-  <div class="col px-md-5"><div class="p-3 border bg-light">
 
-    <form action="" method="get">
-      <select class="custom-select" size=10 multiple>
-      <option name="country">Choose country</option>
+    <form action="#" method="get">
+    <div class="col px-md-5">
+      <select name="country_name" class="custom-select" size=10 multiple>
+      <option unselected>Choose country</option>
       {% for country in countries %}
-        <option value="lalala">{{ country.name }}</option>
+        <option selected value="{{country}}">{{ country.name }}</option>
       {% endfor %}
-      <option selected value="{{country.id}}"></option>
     </select>
-      <h4>Your monthly income</h4>
-      <input type="hidden" name='ddddd' />
+    </div>
+    <div class="p-3 border bg-light">
+      <input type="hidden" name="hi" value='{{selected.value}}' />
       <input type="text" name="wagebox"/>
       <input type="submit" class="btn btn-outline-secondary" value="Submit" name="wagesubmit"/>
+
+    </div>
     </form>
-  </div>
-  </div>
+
 </span>
 </div>
 
