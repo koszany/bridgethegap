@@ -38,6 +38,7 @@ def purchase_power(request, country_name, wage):
         current_numbers[category.name][spending.name] = price
 
     context = {
+         'country_name': country_name,
          'current_numbers': current_numbers.items,
      }
     return render(request, 'wagegap/purchase_power.html', context)
