@@ -26,12 +26,12 @@
         </thead>
 
     <tbody>
-          {%for item, price in category.items %}
+          {%for item, numbers in category.items %}
       <tr>
         <th scope="row">{{ item }}</th>
-        <td>{{ price }} €</td>
-        <td>{{ price }} €</td>
-        <td> 100% </td>
+        {% for num in numbers %}
+        <td>{{ num }} €</td>
+        {% endfor %}
       </tr>
       {% endfor %}
     </tbody>

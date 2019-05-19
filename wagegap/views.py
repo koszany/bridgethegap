@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 import requests
 from django.http import HttpResponse
 from .models import *
+from decimal import Decimal
 
 def index(request):
     countries = []
@@ -25,17 +26,22 @@ def index(request):
 def purchase_power(request, country_name, wage):
     country = Country.objects.get(name=country_name)
     '''dict od dicts
-    {category: {spending: price}}'''
+    {category: {spending: (fact price, purchase price}}'''
     current_numbers = dict()
+
+    min_wage = MinWage.objects.all().get(country=country)
+    wage_factor = Decimal(int(wage) / min_wage.wage)
 
     for category in Category.objects.all():
         current_numbers[category.name] = dict()
 
+
     for item in Cost.objects.all().filter(country=country):
         price = item.price
+        print(repr(price))
         spending = item.spending
         category = spending.category
-        current_numbers[category.name][spending.name] = price
+        current_numbers[category.name][spending.name] = (price, round(price * wage_factor, 2))
 
     context = {
          'country_name': country_name,
