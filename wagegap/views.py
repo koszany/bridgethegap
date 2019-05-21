@@ -41,10 +41,14 @@ def purchase_power(request, country_name, wage):
         print(repr(price))
         spending = item.spending
         category = spending.category
-        current_numbers[category.name][spending.name] = (price, round(price * wage_factor, 2))
+        numbers = (price, round(price * wage_factor, 2))
+        current_numbers[category.name][spending.name] = numbers
+
+    purchase_power_percentage = round(wage_factor * 100, 2)
 
     context = {
          'country_name': country_name,
+         'purchase_power_percentage' : purchase_power_percentage,
          'current_numbers': current_numbers.items,
      }
     return render(request, 'wagegap/purchase_power.html', context)

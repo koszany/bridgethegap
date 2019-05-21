@@ -3,6 +3,7 @@
   <h3>
     How much would be your life costs if you earned a minimal wage?
   </h3>
+  <h4> Your purchase power : {{ purchase_power_percentage }} %
   <h3>Current living costs in {{country_name}}</h3>
     <div id="content">
 
@@ -12,7 +13,6 @@
             <th scope="col">Item</th>
             <th scope="col">Current price</th>
             <th scope="col">Your price</th>
-            <th scope="col">Difference</th>
           </tr>
         </thead>
         {% for header, category in current_numbers %}
