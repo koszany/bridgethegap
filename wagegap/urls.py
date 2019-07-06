@@ -5,5 +5,4 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('purchase-power/<country_name>&<wage>', views.purchase_power, name='purchase-power')
-    #url(r'^search-form/$', views.search_form),
 ]

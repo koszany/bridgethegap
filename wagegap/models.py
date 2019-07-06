@@ -15,7 +15,7 @@ class MinWage(models.Model):
     last_update = models.DateField()
 
     def __str__(self):
-        return 'Minimum wage in ' + str(self.country) + ': ' + str(self.wage)
+        return 'Minimum wage in {}: {}'.format(str(self.country), str(self.wage))
 
 class Category(models.Model):
     name = models.TextField()
@@ -37,4 +37,5 @@ class Cost(models.Model):
     last_update = models.DateField(auto_now=True)
 
     def __str__(self):
-        return str(self.spending) + ' costs ' + str(self.price) + ' in ' + str(self.country)
+        return '{} costs {} in {}'.format(self.spending, self.price, self.country)
+        

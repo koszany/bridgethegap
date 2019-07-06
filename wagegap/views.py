@@ -5,9 +5,7 @@ from .models import *
 from decimal import Decimal
 
 def index(request):
-    countries = []
-    for country in Country.objects.all():
-        countries.append(country)
+    countries = [country for country in Country.objects.all()]
 
     if (request.GET.get('wagesubmit')):
         try:
@@ -16,7 +14,6 @@ def index(request):
             return redirect('purchase-power', country_name=country_name, wage=wage)
         except TypeError:
              print("Wrong input")
-
 
     context = {
          'countries': countries
@@ -38,7 +35,6 @@ def purchase_power(request, country_name, wage):
 
     for item in Cost.objects.all().filter(country=country):
         price = item.price
-        print(repr(price))
         spending = item.spending
         category = spending.category
         numbers = (price, round(price * wage_factor, 2))
